@@ -1,6 +1,5 @@
 package com.devsuperior.dslist.controlers;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,8 @@ public class GameListController {
 	@Autowired
 	private GameListService gameListService;
 	
-//	@Autowired
-//	private GameService gameService;
+	@Autowired
+	private GameService gameService;
 
 	@GetMapping(value = "/{id}")
 	public GameListDTO findById(@PathVariable Long id) {
@@ -39,14 +38,14 @@ public class GameListController {
 		return result;
 	}
 
-//	@GetMapping(value = "/{listId}/games")
-//	public List<GameMinDTO> findGames(@PathVariable Long listId) {
-//		List<GameMinDTO> result = gameService.findByGameList(listId);
-//		return result;
-//	}
-//	
-//	@PostMapping(value = "/{listId}/replacement")
-//	public void move(@PathVariable Long listId, @RequestBody ReplacementDTO body) {
-//		gameListService.move(listId, body.getSourceIndex(), body.getDestinationIndex());
-//	}
+	@GetMapping(value = "/{listId}/games")
+	public List<GameMinDTO> findGames(@PathVariable Long listId) {
+		List<GameMinDTO> result = gameService.findByGameList(listId);
+		return result;
+	}
+	
+	@PostMapping(value = "/{listId}/replacement")
+	public void move(@PathVariable Long listId, @RequestBody ReplacementDTO body) {
+		gameListService.move(listId, body.getSourceIndex(), body.getDestinationIndex());
+	}
 }
